@@ -1,7 +1,9 @@
-package hippo.example.student.events.application;
+package hippo.example.student.events.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hippo.example.student.events.application.dto.EventDto;
+import hippo.example.student.events.application.dto.EventType;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -20,7 +22,7 @@ public class JsonMapper {
   @Value("classpath:events.json")
   private Resource resource;
 
-  public List<Event> readFile() throws IOException {
+  public List<EventDto> readFile() throws IOException {
     var json = readFileAsJson();
     return objectMapper.readValue(json, new TypeReference<>() {
     });
@@ -30,17 +32,17 @@ public class JsonMapper {
     return resource.getContentAsString(StandardCharsets.UTF_8);
   }
 
-  public Event writeToFile() throws IOException {
-    Event aNewEvent = Event.create(
+  public EventDto writeToFile() throws IOException {
+    EventDto aNewEventDto = EventDto.create(
         "wobble",
         LocalDateTime.now(),
         LocalDateTime.now().plusDays(1),
         EventType.TWO
     );
       var currentEvents = readFile();
-      currentEvents.add(aNewEvent);
+      currentEvents.add(aNewEventDto);
       objectMapper.writerWithDefaultPrettyPrinter()
           .writeValue(resource.getFile(), currentEvents);
-      return aNewEvent;
+      return aNewEventDto;
   }
 }

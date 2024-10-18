@@ -1,9 +1,9 @@
-package hippo.example.student.events.application;
+package hippo.example.student.events.application.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Event {
+public class EventDto {
 
   private UUID eventId;
   private String name;
@@ -11,7 +11,7 @@ public class Event {
   private LocalDateTime endDateTime;
   private EventType eventType;
 
-  private Event(
+  private EventDto(
       UUID eventId,
       String name,
       LocalDateTime startDateTime,
@@ -25,13 +25,13 @@ public class Event {
     this.eventType = eventType;
   }
 
-  public static Event create(
+  public static EventDto create(
       String name,
       LocalDateTime startDateTime,
       LocalDateTime endDateTime,
       EventType eventType
   ) {
-    return new Event(
+    return new EventDto(
         UUID.randomUUID(),
         name,
         startDateTime,

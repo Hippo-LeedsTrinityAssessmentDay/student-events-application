@@ -1,4 +1,4 @@
-package hippo.example.student.events.application;
+package hippo.example.student.events.service;
 
 import org.springframework.stereotype.Service;
 

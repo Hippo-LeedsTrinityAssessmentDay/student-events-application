@@ -1,4 +1,4 @@
-package hippo.example.student.events.application;
+package hippo.example.student.events.application.configuration;
 
 import java.text.SimpleDateFormat;
 import org.springframework.context.annotation.Bean;

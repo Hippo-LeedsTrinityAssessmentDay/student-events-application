@@ -1,27 +1,41 @@
 package hippo.example.student.events.application;
 
+import hippo.example.student.events.application.dto.EventDto;
+import hippo.example.student.events.service.JsonMapper;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("test")
+@RequestMapping("events")
 public class EventsController {
 
     @Autowired
     private JsonMapper jsonMapper;
 
-    @GetMapping
-    public List<Event> helloWorld() throws IOException {
+    @GetMapping("/find-all")
+    public List<EventDto> findAll() throws IOException {
         return jsonMapper.readFile();
     }
 
-    @PostMapping
-    public Event create() throws IOException {
+    @GetMapping("/find/{eventId}")
+    public Optional<EventDto> find(
+        @PathVariable("eventId") UUID eventId
+    ) {
+        //TODO - Implement me
+        return Optional.empty();
+    }
+
+    //TODO - Update with incoming params
+    @PostMapping("/create")
+    public EventDto create() throws IOException {
         return jsonMapper.writeToFile();
     }
 }
