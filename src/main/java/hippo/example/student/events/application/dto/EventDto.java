@@ -40,6 +40,21 @@ public class EventDto {
     );
   }
 
+  public static EventDto create(
+      Event event
+  ) {
+    LocalDateTime startDateTime = LocalDateTime.parse(event.getStartDateTime());
+    LocalDateTime endDateTime = LocalDateTime.parse(event.getEndDateTime());
+    EventType eventType = EventType.valueOf(event.getEventType());
+    return new EventDto(
+        UUID.randomUUID(),
+        event.getName(),
+        startDateTime,
+        endDateTime,
+        eventType
+    );
+  }
+
 
   public UUID getEventId() {
     return eventId;

@@ -24,12 +24,13 @@ or for POST
 
 `curl -X POST http://localhost:8080/test`
 
-To run unit tests enter the floowing command
+To run unit tests enter the following command
 
 `mvn test -Dtest={TestClassName}`
 
 ## Future features
 
+Given a student When retrieve event data Then event type is descriptive of what the event is
 Given a student wants to filter events When looking for events Then they have a more refined event list
 Given a student When buys a ticket for a specific event Then they are on the guest list
 Given a student When they want to know more information about a specific event Then they can contact the event supplier

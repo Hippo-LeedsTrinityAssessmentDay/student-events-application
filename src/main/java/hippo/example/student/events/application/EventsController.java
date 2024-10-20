@@ -1,7 +1,9 @@
 package hippo.example.student.events.application;
 
+import hippo.example.student.events.application.dto.Event;
 import hippo.example.student.events.application.dto.EventDto;
-import hippo.example.student.events.service.JsonMapper;
+import hippo.example.student.events.service.EventService;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventsController {
 
     @Autowired
-    private JsonMapper jsonMapper;
+    private EventService eventService;
 
     @GetMapping("/find-all")
     public List<EventDto> findAll() throws IOException {
-        return jsonMapper.readFile();
+        return eventService.getAllEvents();
     }
 
     @GetMapping("/find/{eventId}")
@@ -33,9 +36,8 @@ public class EventsController {
         return Optional.empty();
     }
 
-    //TODO - Update with incoming params
     @PostMapping("/create")
-    public EventDto create() throws IOException {
-        return jsonMapper.writeToFile();
+    public EventDto create(@Valid @RequestBody Event requestBody) throws IOException {
+        return eventService.createEvent(requestBody);
     }
 }
