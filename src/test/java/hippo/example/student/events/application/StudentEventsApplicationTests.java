@@ -147,11 +147,42 @@ class StudentEventsApplicationTests {
 	@ParameterizedTest
 	@ValueSource(strings = {
 			"{}",
-			"{\"name\":\"some event\",\"startDateTime\":\"2024-10-18T15:45:26.669098\",\"endDateTime\":\"2024-11-18T15:45:26.669098\"}",
-			"{\"startDateTime\":\"2024-10-18T15:45:26.669098\",\"endDateTime\":\"2024-11-18T15:45:26.669098\",\"eventType\":\"TWO\"}",
-			"{\"name\":\"some event\",,\"endDateTime\":\"2024-11-18T15:45:26.669098\",\"eventType\":\"TWO\"}",
-			"{\"name\":\"some event\",\"startDateTime\":\"2024-11-18T15:45:26.669098\",\"eventType\":\"TWO\"}",
-			"{\"name\":\"some event\",\"startDateTime\":\"blah\",\"endDateTime\":\"blah\",\"eventType\":\"TWO\"}",
+			"""
+				{
+					"name":"some event",
+					"startDateTime": "2024-10-18T15:45:26.669098",
+					"endDateTime": "2024-11-18T15:45:26.669098"
+				}
+			""",
+			"""
+				{
+					"startDateTime":"2024-10-18T15:45:26.669098",
+					"endDateTime":"2024-11-18T15:45:26.669098",
+					"eventType":"TWO"
+				}
+			""",
+			"""
+				{
+					"name":"some event",
+					"endDateTime":"2024-11-18T15:45:26.669098",
+					"eventType":"TWO"
+				}
+			""",
+			"""
+				{
+					"name":"some event",
+					"startDateTime":"2024-11-18T15:45:26.669098",
+					"eventType":"TWO"
+				}
+			""",
+			"""
+				{
+					"name":"some event",
+					"startDateTime":"blah",
+					"endDateTime":"blah",
+					"eventType":"TWO"
+				}
+			""",
 	})
 	void postEventsShouldReturnBadRequest(String requestBody) throws Exception {
 		// Assert

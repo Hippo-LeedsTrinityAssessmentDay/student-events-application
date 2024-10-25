@@ -1,8 +1,14 @@
 # student-events-application
 
-This is a simple web application to return and post events.
+This is a simple web application to be used by students to post and retrieve events.
 
 ## Pre-requisites 
+
+- Have a SSH Key set up for GitHub
+- Have installed
+  - Java (recommend 17 Correto)
+  - Maven (recommend 3.9.9)
+- Optional postman
 
 ## How to run the application
 In terminal use command:
@@ -12,7 +18,6 @@ To do a clean install:
 
 To run the application:
 `mvn spring-boot:run`
-
 
 ## How to test the endpoints
 To use curl commands to hit the existing endpoints
@@ -30,7 +35,6 @@ To run unit tests enter the following command
 
 ## Future features
 
-Given a student When retrieve event data Then event type is descriptive of what the event is
-Given a student wants to filter events When looking for events Then they have a more refined event list
-Given a student When buys a ticket for a specific event Then they are on the guest list
-Given a student When they want to know more information about a specific event Then they can contact the event supplier
+Add a event description field to event data
+Have a guest list for events so students can sign up to events and there could be a max number of attendees
+Could there be a contact supplier option

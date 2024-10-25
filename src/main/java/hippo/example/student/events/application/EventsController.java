@@ -32,7 +32,7 @@ public class EventsController {
     public Optional<EventDto> find(
         @PathVariable("eventId") UUID eventId
     ) {
-        //TODO - Implement me
+        //TODO - Implement
         return Optional.empty();
     }
 
