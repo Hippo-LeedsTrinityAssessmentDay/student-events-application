@@ -1,9 +1,9 @@
 [
   {
     "eventId": "4e75d25c-0094-4ee2-ae47-ab55f4f0628b",
-    "name": "wobble",
-    "startDateTime": "2024-10-18T15:45:26.669098",
-    "endDateTime": "2024-10-19T15:45:26.669128",
-    "eventType": "TWO"
+    "name": "Hippo Assessment Day",
+    "startDateTime": "2024-11-11T13:00:00Z",
+    "endDateTime": "2024-11-11T17:00:00Z",
+    "eventType": "TRAINING"
   }
 ]

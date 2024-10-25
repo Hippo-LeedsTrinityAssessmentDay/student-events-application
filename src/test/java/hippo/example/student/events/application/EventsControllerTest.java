@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.exceptions.base.MockitoException;
@@ -29,7 +28,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(EventsController.class)
-class StudentEventsApplicationTests {
+class EventsControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -67,7 +66,7 @@ class StudentEventsApplicationTests {
           String.valueOf(i),
 					LocalDateTime.of(2020, 2, 25,10,15),
 					LocalDateTime.of(2020, 3, 25,10,15),
-					EventType.TWO
+					EventType.TRAINING
 			));
 		}
 		when(eventService.getAllEvents()).thenReturn(mockEventList);
@@ -82,7 +81,7 @@ class StudentEventsApplicationTests {
 	@Test
 	void getAllEventsShouldReturnErrorFromService() throws Exception {
 		// Arrange
-		when(eventService.getAllEvents()).thenThrow(new MockitoException("Oops"));
+		when(eventService.getAllEvents()).thenThrow(new Exception("Oops"));
 
 		// Assert
 		this.mockMvc.perform(get("/events/find-all"))
@@ -127,10 +126,10 @@ class StudentEventsApplicationTests {
 	void postEventsShouldReturnSuccess() throws Exception {
 		// Arrange
 		Event event = new Event(
-				"some event",
+				"Git Skills",
 				"2024-10-18T15:45:26.669098",
 				"2024-11-18T15:45:26.669098",
-				"TWO"
+				"TRAINING"
 		);
 		EventDto eventDto = EventDto.create(event);
 		String requestBody = objectMapper.writeValueAsString(event);
@@ -158,21 +157,21 @@ class StudentEventsApplicationTests {
 				{
 					"startDateTime":"2024-10-18T15:45:26.669098",
 					"endDateTime":"2024-11-18T15:45:26.669098",
-					"eventType":"TWO"
+					"eventType":"SOCIAL"
 				}
 			""",
 			"""
 				{
 					"name":"some event",
 					"endDateTime":"2024-11-18T15:45:26.669098",
-					"eventType":"TWO"
+					"eventType":"TRAINING"
 				}
 			""",
 			"""
 				{
 					"name":"some event",
 					"startDateTime":"2024-11-18T15:45:26.669098",
-					"eventType":"TWO"
+					"eventType":"OHTER"
 				}
 			""",
 			"""
@@ -180,7 +179,7 @@ class StudentEventsApplicationTests {
 					"name":"some event",
 					"startDateTime":"blah",
 					"endDateTime":"blah",
-					"eventType":"TWO"
+					"eventType":"OTHER"
 				}
 			""",
 	})
@@ -197,10 +196,10 @@ class StudentEventsApplicationTests {
 	void postEventsShouldReturnErrorFromService() throws Exception {
 		// Arrange
 		Event event = new Event(
-				"some event",
+				"anEvent",
 				"2024-10-18T15:45:26.669098",
 				"2024-11-18T15:45:26.669098",
-				"TWO"
+				"GAMING"
 		);
 		String requestBody = objectMapper.writeValueAsString(event);
 		when(eventService.createEvent(event)).thenThrow(new MockitoException("Oops"));

@@ -2,6 +2,8 @@ package hippo.example.student.events.application.dto;
 
 public enum EventType {
 
-  ONE,
-  TWO
+  SOCIAL,
+  TRAINING,
+  SPORTS,
+  OTHER
 }
