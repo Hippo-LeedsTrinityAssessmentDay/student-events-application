@@ -1,6 +1,7 @@
 package hippo.example.student.events.application;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,6 +18,7 @@ import hippo.example.student.events.service.EventService;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -92,10 +94,11 @@ class EventsControllerTest {
 	@Test
 	void getEventShouldReturnNoEventFromService() throws Exception {
 		// Arrange
-		// TODO
+		String eventName = "some-id";
+		when(eventService.getEvent(eventName)).thenReturn(null);
 
 		//Assert
-		this.mockMvc.perform(get("/events/find/some-id"))
+		this.mockMvc.perform(get(String.format("/events/find/%s", eventName)))
 				.andDo(print())
 				.andExpect(status().isOk());
 	}
@@ -103,12 +106,20 @@ class EventsControllerTest {
 	@Test
 	void getEventShouldReturnEventFromService() throws Exception {
 		// Arrange
-		// TODO
+		String eventName = "some-id";
+		EventDto mockEvent = EventDto.create(
+				eventName,
+				LocalDateTime.of(2020, 2, 25,10,15),
+				LocalDateTime.of(2020, 3, 25,10,15),
+				EventType.TRAINING
+		);
+		when(eventService.getEvent(eventName)).thenReturn(Optional.of(mockEvent));
 
-		// Assert
-		this.mockMvc.perform(get("/events/find/some-id"))
+		//Assert
+		this.mockMvc.perform(get(String.format("/events/find/%s", eventName)))
 				.andDo(print())
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(1)));
 	}
 
 	@Test

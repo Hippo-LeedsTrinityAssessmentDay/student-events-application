@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,12 +29,12 @@ public class EventsController {
         return eventService.getAllEvents();
     }
 
-    @GetMapping("/find/{eventId}")
+    @GetMapping("/find/{eventName}")
     public Optional<EventDto> find(
-        @PathVariable("eventId") UUID eventId
+        @PathVariable("eventName") String eventId
     ) {
-        //TODO - Implement
-        return Optional.empty();
+        //TODO not implemented
+        return null;
     }
 
     @PostMapping("/create")
