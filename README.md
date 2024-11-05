@@ -1,6 +1,6 @@
 # student-events-application
 
-This is a simple web application to be used by students to post and retrieve events.
+This is a simple web application to be used by students to post and retrieve events. 
 
 ## Pre-requisites 
 
