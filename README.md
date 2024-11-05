@@ -6,8 +6,8 @@ This is a simple web application to be used by students to post and retrieve eve
 
 - Have a SSH Key set up for GitHub
 - Have installed
-  - Java (recommend 17 Correto)
-  - Maven (recommend 3.9.9)
+  - Java (recommend 17 Corretto) - https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/what-is-corretto-17.html
+  - Maven (recommend 3.9.9) - https://maven.apache.org/install.html
 - Optional postman
 
 ## Setup
