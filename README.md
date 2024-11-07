@@ -30,10 +30,20 @@ Open a terminal and enter the following command for GET
 
 `curl -X GET http://localhost:8080/events/find-all`
 
+or for GET specific event
+
+`curl -X GET http://localhost:8080/events/find/Hippo%20Assessment%20Day`
+
 or for POST
 
-`curl -X POST http://localhost:8080/events/create`
-(don't forget to add a request body)
+`curl --location 'http://localhost:8080/events/create' \
+--header 'Content-Type: application/json' \
+--data '{
+        "name": "wobble",
+        "startDateTime": "2024-10-18T15:45:26.669098",
+        "endDateTime": "2024-10-19T15:45:26.669128",
+        "eventType": "SOCIAL"
+}'`
 
 or can use Postman
 

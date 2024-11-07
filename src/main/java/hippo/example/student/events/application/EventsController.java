@@ -10,6 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +32,11 @@ public class EventsController {
     }
 
     @GetMapping("/find/{eventName}")
-    public Optional<EventDto> find(
+    public String find(
         @PathVariable("eventName") String eventId
     ) {
         //TODO not implemented
-        return null;
+        return "Oops";
     }
 
     @PostMapping("/create")

@@ -83,7 +83,7 @@ class EventsControllerTest {
 	@Test
 	void getAllEventsShouldReturnErrorFromService() throws Exception {
 		// Arrange
-		when(eventService.getAllEvents()).thenThrow(new Exception("Oops"));
+		when(eventService.getAllEvents()).thenThrow(new MockitoException("Oops"));
 
 		// Assert
 		this.mockMvc.perform(get("/events/find-all"))
@@ -125,10 +125,11 @@ class EventsControllerTest {
 	@Test
 	void getEventShouldReturnErrorFromService() throws Exception {
 		// Arrange
-		// TODO
+		String eventName = "some-id";
+		when(eventService.getEvent(eventName)).thenThrow(new MockitoException("Oops"));
 
 		// Assert
-		this.mockMvc.perform(get("/events/find/some-id"))
+		this.mockMvc.perform(get(String.format("/events/find/%s", eventName)))
 				.andDo(print())
 				.andExpect(status().isInternalServerError());
 	}
