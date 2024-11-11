@@ -28,7 +28,13 @@ public class EventsController {
 
     @GetMapping("/find-all")
     public List<EventDto> findAll() throws IOException {
-        return eventService.getAllEvents();
+        try {
+            return eventService.getAllEvents();
+        }
+        catch(IOException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @GetMapping("/find/{eventName}")
