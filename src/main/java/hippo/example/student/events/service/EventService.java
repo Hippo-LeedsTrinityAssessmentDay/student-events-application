@@ -21,6 +21,7 @@ public class EventService {
 
   public Optional<EventDto> getEvent(String eventName) throws NotImplementedException {
     // TODO: NOT IMPLEMENTED
+    //return Optional.empty();
     throw new NotImplementedException("Not implemented");
   }
 
