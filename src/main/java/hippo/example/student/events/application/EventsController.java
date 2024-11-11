@@ -32,11 +32,8 @@ public class EventsController {
     }
 
     @GetMapping("/find/{eventName}")
-    public String find(
-        @PathVariable("eventName") String eventId
-    ) {
-        //TODO not implemented
-        return "Oops";
+    public EventDto find(@PathVariable("eventName") String eventId) throws IOException {
+        return eventService.getEvent(eventId);
     }
 
     @PostMapping("/create")

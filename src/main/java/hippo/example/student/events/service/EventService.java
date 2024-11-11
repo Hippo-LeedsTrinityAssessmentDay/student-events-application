@@ -19,9 +19,8 @@ public class EventService {
     return jsonMapper.readFile();
   }
 
-  public Optional<EventDto> getEvent(String eventName) throws NotImplementedException {
-    // TODO: NOT IMPLEMENTED
-    throw new NotImplementedException("Not implemented");
+  public EventDto getEvent(String eventName) throws IOException {
+    return jsonMapper.getEvent(eventName);
   }
 
   public EventDto createEvent(Event event) throws IOException {

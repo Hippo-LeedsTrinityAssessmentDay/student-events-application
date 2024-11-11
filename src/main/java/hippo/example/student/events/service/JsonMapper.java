@@ -30,6 +30,19 @@ public class JsonMapper {
     });
   }
 
+  public EventDto getEvent(String event) throws IOException {
+    // var object = objectMapper.readValue(event, new TypeReference<>() { });
+    // System.out.println(object);
+    var file = readFile();
+    var jsonFile = readFileAsJson();
+    int jsonIndex = jsonFile.indexOf(event);
+    var gotEvent = file.get(jsonIndex);
+    System.out.println(gotEvent);
+    return gotEvent;
+  }
+  
+
+
   public EventDto writeToFile(EventDto newEvent) throws IOException {
       var currentEvents = readFile();
       currentEvents.add(newEvent);
