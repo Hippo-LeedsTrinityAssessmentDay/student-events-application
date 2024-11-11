@@ -74,3 +74,8 @@ Here is some options of features you could add...
     attendees
 
 (Feel free to come up with your own feature)
+
+
+###
+Feedback form
+https://forms.gle/C2MF29Vw6xJ2qXV29 
