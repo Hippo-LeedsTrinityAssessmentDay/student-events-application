@@ -6,6 +6,8 @@ import hippo.example.student.events.application.dto.EventDto;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -30,14 +32,14 @@ public class JsonMapper {
     });
   }
 
-  public EventDto getEvent(String eventName) throws IOException {
+  public Optional<EventDto> getEvent(String eventName) throws IOException {
     List<EventDto> file = readFile(); 
     for (EventDto event : file) {
       if (event.getName().equals(eventName)) {
-        return event;
+        return Optional.of(event);
       }
     }
-    return null;
+    return Optional.empty();
   }
   
 
