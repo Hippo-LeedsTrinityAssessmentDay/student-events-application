@@ -43,7 +43,7 @@ public class EventsController {
     public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody) throws IOException {
         try{
             EventDto newEvent = eventService.createEvent(requestBody);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
+            return ResponseEntity.status(HttpStatus.OK).body(newEvent);
         } catch (IOException e) {
             return ResponseEntity.status(400).build();
         }
