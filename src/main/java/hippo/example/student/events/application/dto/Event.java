@@ -1,24 +1,27 @@
 package hippo.example.student.events.application.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class Event {
+  @NotNull(message = "Event name is mandatory")
+  @Size(min = 1, message = "Event name cannot be empty")
   private String name;
+
+  @NotNull(message = "Start date and time is mandatory")
   private String startDateTime;
+
+  @NotNull(message = "End date and time is mandatory")
   private String endDateTime;
+
   @NotNull(message = "Event Type is mandatory")
   private String eventType;
 
-  public Event(
-      String someEvent,
-      String s,
-      String s1,
-      String two
-  ) {
-    name = someEvent;
-    startDateTime = s;
-    endDateTime = s1;
-    eventType = two;
+  public Event(String name, String startDateTime, String endDateTime, String eventType) {
+      this.name = name;
+      this.startDateTime = startDateTime;
+      this.endDateTime = endDateTime;
+      this.eventType = eventType;
   }
 
   public String getName() {

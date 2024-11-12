@@ -31,7 +31,7 @@ public class JsonMapper {
   }
 
   public EventDto getEvent(String eventName) throws IOException {
-    List<EventDto> file = readFile();
+    List<EventDto> file = readFile(); 
     for (EventDto event : file) {
       if (event.getName().equals(eventName)) {
         return event;

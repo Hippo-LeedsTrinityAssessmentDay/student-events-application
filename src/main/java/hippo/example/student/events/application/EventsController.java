@@ -4,6 +4,9 @@ import hippo.example.student.events.application.dto.Event;
 import hippo.example.student.events.application.dto.EventDto;
 import hippo.example.student.events.service.EventService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +40,13 @@ public class EventsController {
     }
 
     @PostMapping("/create")
-    public EventDto create(@Valid @RequestBody Event requestBody) throws IOException {
-        return eventService.createEvent(requestBody);
+    public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody) throws IOException {
+        try{
+            EventDto newEvent = eventService.createEvent(requestBody);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
+        } catch (IOException e) {
+            return ResponseEntity.status(400).build();
+        }
     }
+    
 }
