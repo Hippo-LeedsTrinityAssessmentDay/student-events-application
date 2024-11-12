@@ -113,13 +113,17 @@ class EventsControllerTest {
 				LocalDateTime.of(2020, 3, 25,10,15),
 				EventType.TRAINING
 		);
-		when(eventService.getEvent(eventName)).thenReturn(Optional.of(mockEvent));
+		when(eventService.getEvent(eventName)).thenReturn(mockEvent);
 
 		//Assert
 		this.mockMvc.perform(get(String.format("/events/find/%s", eventName)))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1)));
+				.andExpect(jsonPath("$.name").value(eventName))
+				.andExpect(jsonPath("$.startDateTime").value("2020-02-25T10:15:00"))
+				.andExpect(jsonPath("$.eventType").value("TRAINING"));
+
+
 	}
 
 	@Test
