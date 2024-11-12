@@ -201,9 +201,10 @@ class EventsControllerTest {
 	})
 	void postEventsShouldReturnBadRequest(String requestBody) throws Exception {
 		// Assert
+		Event invalidEvent = new Event("event-name", "2024-11-12T10:00", "2024-11-12T12:00", null);
 		this.mockMvc.perform(post("/events/create")
-						.content(requestBody)
-						.contentType(MediaType.APPLICATION_JSON))
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(new ObjectMapper().writeValueAsString(invalidEvent)))  
 				.andDo(print())
 				.andExpect(status().isBadRequest());
 	}

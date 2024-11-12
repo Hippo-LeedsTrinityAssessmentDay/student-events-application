@@ -14,7 +14,9 @@ import java.util.UUID;
 import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,12 +42,15 @@ public class EventsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody) throws IOException {
+    public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody, BindingResult result) throws IOException {
+        if (result.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         try{
             EventDto newEvent = eventService.createEvent(requestBody);
             return ResponseEntity.status(HttpStatus.OK).body(newEvent);
         } catch (IOException e) {
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
     
