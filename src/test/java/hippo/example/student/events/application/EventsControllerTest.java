@@ -1,6 +1,8 @@
 package hippo.example.student.events.application;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -15,6 +17,8 @@ import hippo.example.student.events.application.dto.Event;
 import hippo.example.student.events.application.dto.EventDto;
 import hippo.example.student.events.application.dto.EventType;
 import hippo.example.student.events.service.EventService;
+
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -219,7 +223,8 @@ class EventsControllerTest {
 				"GAMING"
 		);
 		String requestBody = objectMapper.writeValueAsString(event);
-		when(eventService.createEvent(event)).thenThrow(new MockitoException("Oops"));
+
+		doThrow(new IOException("Sim IO ERROR")).when(eventService).createEvent(any(Event.class));
 
 		// Assert
 		this.mockMvc.perform(post("/events/create")

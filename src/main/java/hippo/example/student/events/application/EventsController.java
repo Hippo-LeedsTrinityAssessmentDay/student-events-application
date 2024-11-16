@@ -55,13 +55,15 @@ public class EventsController {
     @PostMapping("/create")
     public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); // 400 for validation errors
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         try {
             EventDto newEvent = eventService.createEvent(requestBody);
-            return ResponseEntity.status(HttpStatus.OK).body(newEvent); // 200 for successful creation
+            return ResponseEntity.status(HttpStatus.OK).body(newEvent);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Return 500 for service failure
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
     

@@ -24,10 +24,12 @@ public class EventService {
   }
 
   public EventDto createEvent(Event event) throws IOException {
-    EventDto aNewEventDto = EventDto.create(
-        event
-    );
-    return jsonMapper.writeToFile(aNewEventDto);
+    try {
+      EventDto aNewEventDto = EventDto.create(event);
+      return jsonMapper.writeToFile(aNewEventDto);
+    } catch (IOException e) {
+      throw new RuntimeException("Error when creating event", e);
+    }
   }
 
 }
