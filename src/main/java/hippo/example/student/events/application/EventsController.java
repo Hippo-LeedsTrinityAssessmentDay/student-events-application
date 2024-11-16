@@ -37,8 +37,13 @@ public class EventsController {
     }
 
     @GetMapping("/find/{eventName}")
-    public EventDto find(@PathVariable("eventName") String eventId) throws IOException {
-        return eventService.getEvent(eventId);
+    public ResponseEntity<EventDto> find(@PathVariable("eventName") String eventId) throws IOException {
+        try {
+            EventDto event = eventService.getEvent(eventId);
+            return ResponseEntity.ok(event);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/create")
@@ -49,8 +54,8 @@ public class EventsController {
         try{
             EventDto newEvent = eventService.createEvent(requestBody);
             return ResponseEntity.status(HttpStatus.OK).body(newEvent);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
     
