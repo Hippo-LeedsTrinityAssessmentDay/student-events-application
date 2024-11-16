@@ -32,8 +32,14 @@ public class EventsController {
     private EventService eventService;
 
     @GetMapping("/find-all")
-    public List<EventDto> findAll() throws IOException {
-        return eventService.getAllEvents();
+    public ResponseEntity<List<EventDto>> findAll() throws IOException {
+        try {
+            List<EventDto> events = eventService.getAllEvents();
+            return ResponseEntity.status(HttpStatus.OK).body(events);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
     @GetMapping("/find/{eventName}")
@@ -47,16 +53,17 @@ public class EventsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody, BindingResult result) throws IOException {
+    public ResponseEntity<EventDto> create(@Valid @RequestBody Event requestBody, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); // 400 for validation errors
         }
-        try{
+        try {
             EventDto newEvent = eventService.createEvent(requestBody);
-            return ResponseEntity.status(HttpStatus.OK).body(newEvent);
+            return ResponseEntity.status(HttpStatus.OK).body(newEvent); // 200 for successful creation
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Return 500 for service failure
         }
     }
+    
     
 }
